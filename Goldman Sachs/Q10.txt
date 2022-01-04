@@ -1,0 +1,1 @@
+We will create a min priority queue of size 10 and insert first 10 numbers. Then for remaining numbers we will run a loop and for each we will see if it is greater than the top element of priority queue or not. If it is then we will pop the top element and insert this element. After the loop ends we will store the 10 elements of priority queue in a vector and return that vector.
