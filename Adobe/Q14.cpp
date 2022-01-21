@@ -1,0 +1,66 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define N 1000
+
+
+ // } Driver Code Ends
+// you are required to complete this function 
+// function should print the required range
+class Solution{
+    public:
+    #define p pair<int,pair<int,int>>
+    pair<int,int> findSmallestRange(int arr[][N], int n, int k)
+    {
+          //code here
+        priority_queue<p,vector<p>,greater<p>>qu;
+        int mn=INT_MAX,mx=INT_MIN,r=INT_MAX;
+        int low=0,high=0;
+        for(int i=0;i<k;i++){
+            qu.push({arr[i][0],{i,0}});
+            mn=min(arr[i][0],mn);
+            mx=max(arr[i][0],mx);
+        }
+        while(true){
+            p temp=qu.top();
+            qu.pop();
+            int mn1=temp.first;
+            if(r>mx-mn1){
+                mn=mn1;
+                low=mn;
+                high=mx;
+                r=mx-mn;
+            }
+          int i=temp.second.first;
+          int j=temp.second.second;
+          if(j==n-1)break;
+          qu.push({arr[i][j+1],{i,j+1}});
+          if(mx<arr[i][j+1]){
+              mx=arr[i][j+1];
+          }
+        }
+        return {low,high};
+    }
+};
+
+// { Driver Code Starts.
+int main()
+{
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        int n, k;
+        cin>>n>>k;
+        int arr[N][N];
+        pair<int,int> rangee;
+        for(int i=0; i<k; i++)
+            for(int j=0; j<n; j++)
+                cin>>arr[i][j];
+        Solution obj;
+	    rangee = obj.findSmallestRange(arr, n, k);
+	    cout<<rangee.first<<" "<<rangee.second<<"\n";
+    }   
+	return 0;
+}
+
+  // } Driver Code Ends
